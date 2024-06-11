@@ -1,7 +1,19 @@
-import React from "react";
-import { TouchableOpacity, Text, View, Image } from "react-native";
+import ModalLayout from "@/features/layouts/ModalLayout/ModalLayout";
+import { router } from "expo-router";
+import React, { useState } from "react";
+import { TouchableOpacity, Text, View, Image, Modal } from "react-native";
+import DetailPokemonModal from "../modals/DetailPokemonModal";
 
 const PokemonItem = ({ pokemon }) => {
+  const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
+
+  const handleOpenDetailsModal = () => {
+    setIsDetailsModalVisible(true);
+  };
+
+  const handleCloseDetailsModal = () => {
+    setIsDetailsModalVisible(false);
+  };
 
   const getColorByType = (type) => {
     switch (type) {
@@ -45,7 +57,7 @@ const PokemonItem = ({ pokemon }) => {
         return "bg-slate-300";
     }
   };
-  
+
   const getLightenColorByType = (type) => {
     switch (type) {
       case "normal":
@@ -90,38 +102,69 @@ const PokemonItem = ({ pokemon }) => {
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.6} className="border-b">
-      <View className="flex-row justify-start bg-slate-100">
-        <View className={`rounded-r-full ${getLightenColorByType(pokemon.types[0].type.name)}`}>
-          <Image
-            source={{ uri: pokemon.sprites.front_default }}
-            style={{ width: 100, height: 100 }}
-            resizeMode="contain"
+    <>
+      {/* Details Modal */}
+      <Modal
+        animationType="slide"
+        transparent
+        visible={isDetailsModalVisible}
+        onRequestClose={handleCloseDetailsModal}
+      >
+        <ModalLayout
+          title="Detalhes"
+          fullScreen
+          onClose={handleCloseDetailsModal}
+        >
+          <DetailPokemonModal
+            pokemon={pokemon}
+            color={getLightenColorByType(pokemon.types[0].type.name)}
+            onClose={handleCloseDetailsModal}
           />
-        </View>
-        <View className="p-4 flex-1">
-          <View className="flex-row justify-between">
-            <Text className="text-[16px] font-bold text-slate-800 uppercase">
-              {pokemon.name}
-            </Text>
-            <Text className="text-[12px] text-slate-600">#{pokemon.id}</Text>
+        </ModalLayout>
+      </Modal>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={handleOpenDetailsModal}
+        className="border-b"
+      >
+        <View className="flex-row bg-slate-100">
+          <View
+            className={`rounded-r-full border-r-2 border-slate-300 ${getLightenColorByType(
+              pokemon.types[0].type.name
+            )}`}
+          >
+            <Image
+              source={{ uri: pokemon.sprites.other.home.front_default }}
+              style={{ width: 120, height: 100 }}
+              resizeMode="contain"
+            />
           </View>
+          <View className="p-4 flex-1">
+            <View className="flex-row justify-between">
+              <Text className="text-[16px] font-bold text-slate-800 uppercase">
+                {pokemon.name}
+              </Text>
+              <Text className="text-[12px] text-slate-600">#{pokemon.id}</Text>
+            </View>
 
-          <View className="flex-row gap-1 items-end flex-1">
-            {pokemon.types.map((typeInfo, index) => (
-              <View
-                key={index}
-                className={`items-center ${getColorByType(typeInfo.type.name)} rounded-2xl px-2 py-1 flex-1`}
-              >
-                <Text className="uppercase text-[12px] text-white">
-                  {typeInfo.type.name}
-                </Text>
-              </View>
-            ))}
+            <View className="flex-row gap-1 items-end flex-1">
+              {pokemon.types.map((typeInfo, index) => (
+                <View
+                  key={index}
+                  className={`items-center ${getColorByType(
+                    typeInfo.type.name
+                  )} rounded-2xl px-2 py-1 flex-1 border-slate-300 border`}
+                >
+                  <Text className="uppercase text-[12px] text-white">
+                    {typeInfo.type.name}
+                  </Text>
+                </View>
+              ))}
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </>
   );
 };
 

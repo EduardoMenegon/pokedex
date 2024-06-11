@@ -75,7 +75,7 @@ const PokemonScreen = () => {
 
   return (
     <View className="flex-1 bg-blue-400">
-      <View className="items-center">
+      <View className="items-center h-1/4 mb-4">
         <Image source={require("../../../assets/logo.png")} resizeMode="contain" />
       </View>
 
