@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { VirtualizedList, RefreshControl } from "react-native";
+
 import PokemonItem from "./items/PokemonItem";
 import { Loading } from "@/components/Loading/Loading";
 

@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, Modal } from "react-native";
+import Reanimated, { PinwheelIn, SlideInDown } from "react-native-reanimated";
+
+import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { useIsConnected } from "react-native-offline";
+
+import Feather from "@expo/vector-icons/Feather";
+import axios from "axios";
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/Card/Card";
-import Feather from "@expo/vector-icons/Feather";
-import { Image, Text, View, TouchableOpacity, Modal } from "react-native";
-import { useIsConnected } from "react-native-offline";
-import axios from "axios";
-import PokemonList from "./PokemonList";
-import { useRouter } from "expo-router";
-import Reanimated, { PinwheelIn, SlideInDown } from "react-native-reanimated";
-import ModalLayout from "../layouts/ModalLayout/ModalLayout";
-import FilterPokemonModal from "./modals/FilterPokemonModal";
+  } from "@/components/Card/Card";
+  
+  import PokemonList from "./PokemonList";
+  import ModalLayout from "../layouts/ModalLayout/ModalLayout";
+  import FilterPokemonModal from "./modals/FilterPokemonModal";
 
 const PokemonScreen = () => {
   const isConnected = useIsConnected();
   const router = useRouter();
+
+  const { t } = useTranslation();
 
   const [pokemons, setPokemons] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
@@ -129,7 +136,7 @@ const PokemonScreen = () => {
         onRequestClose={handleCloseFilterModal}
       >
         <ModalLayout
-          title="Filtrar"
+          title={t("Filtrar Pokémons")}
           fullScreen
           onClose={handleCloseFilterModal}
         >
@@ -193,7 +200,7 @@ const PokemonScreen = () => {
             <CardContent className="p-0 flex-1">
               {filteredPokemons.length === 0 ? (
                 <View className="flex-1 justify-center items-center">
-                  <Text className="text-slate-500 text-lg">Nenhum Pokémon encontrado</Text>
+                  <Text className="text-slate-500 text-lg">{t("Nenhum Pokémon encontrado")}</Text>
                 </View>
               ) : (
                 <PokemonList

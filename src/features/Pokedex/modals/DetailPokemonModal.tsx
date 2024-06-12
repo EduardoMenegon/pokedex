@@ -1,5 +1,6 @@
-import { View, Text, Image } from "react-native";
 import React from "react";
+import { View, Text, Image } from "react-native";
+import { useTranslation } from "react-i18next";
 
 interface DetailsPokemonModalProps {
   pokemon: any;
@@ -13,6 +14,8 @@ const DetailPokemonModal = ({
   pokemon,
   getColorByType,
 }: DetailsPokemonModalProps) => {
+  const { t } = useTranslation();
+
   return (
     <View className={`${color} flex-1 px-2`}>
       <View>
@@ -50,23 +53,25 @@ const DetailPokemonModal = ({
         <View className="gap-2 mb-4">
           <View className="border-b border-slate-400">
             <Text className="text-[18px] font-extrabold text-slate-800">
-              About
+              {t("Sobre")}
             </Text>
           </View>
           <View className="flex-row justify-between w-1/2">
-            <Text className="text-[16px] text-slate-400">Base experience</Text>
+            <Text className="text-[16px] text-slate-400">
+              {t("Experiência Base")}
+            </Text>
             <Text className="text-[16px] font-bold text-slate-800">
               {pokemon.base_experience}
             </Text>
           </View>
           <View className="flex-row justify-between w-1/2">
-            <Text className="text-[16px] text-slate-400">Height</Text>
+            <Text className="text-[16px] text-slate-400">{t("Altura")}</Text>
             <Text className="text-[16px] font-bold text-slate-800">
               {pokemon.height}
             </Text>
           </View>
           <View className="flex-row justify-between w-1/2">
-            <Text className="text-[16px] text-slate-400">Weight</Text>
+            <Text className="text-[16px] text-slate-400">{t("Peso")}</Text>
             <Text className="text-[16px] font-bold text-slate-800">
               {pokemon.weight}
             </Text>
@@ -76,12 +81,15 @@ const DetailPokemonModal = ({
         <View className="gap-2 mb-2">
           <View className="border-b border-slate-400">
             <Text className="text-[18px] font-extrabold text-slate-800">
-              Abilities
+              {t("Abilities")}
             </Text>
           </View>
           <View>
             {pokemon.abilities.map((ability: any, index: number) => (
-              <Text key={index} className="text-[16px] text-slate-800 font-bold uppercase">
+              <Text
+                key={index}
+                className="text-[16px] text-slate-800 font-bold uppercase"
+              >
                 {ability.ability.name}
               </Text>
             ))}

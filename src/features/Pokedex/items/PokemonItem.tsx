@@ -1,10 +1,14 @@
-import ModalLayout from "@/features/layouts/ModalLayout/ModalLayout";
-import { router } from "expo-router";
 import React, { useState } from "react";
 import { TouchableOpacity, Text, View, Image, Modal } from "react-native";
+
+import { useTranslation } from "react-i18next";
+
 import DetailPokemonModal from "../modals/DetailPokemonModal";
+import ModalLayout from "@/features/layouts/ModalLayout/ModalLayout";
 
 const PokemonItem = ({ pokemon }) => {
+  const { t } = useTranslation();
+
   const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
 
   const handleOpenDetailsModal = () => {
@@ -111,7 +115,7 @@ const PokemonItem = ({ pokemon }) => {
         onRequestClose={handleCloseDetailsModal}
       >
         <ModalLayout
-          title="Detalhes"
+          title={t("Detalhes")}
           fullScreen
           onClose={handleCloseDetailsModal}
         >

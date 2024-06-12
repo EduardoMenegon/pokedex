@@ -1,5 +1,27 @@
 {
-  "translation" : {
-    "" : ""
+  "translation": {
+    "Pokedex": "Pokedex",
+    "Ranking": "Ranking",
+    "Configurações": "Configurações",
+
+    "Nenhum Pokémon encontrado" : "Nenhum Pokémon encontrado",
+
+    "Clique na Pobébola para entrar !": "Clique na Pobébola para entrar !",
+    "Entrar": "Entrar",
+
+    "Filtrar Pokémons": "Filtrar Pokémons",
+    "Nome": "Nome",
+    "Digite o nome do Pokémon": "Digite o nome do Pokémon",
+    "Tipo": "Tipo",
+    "Digite o tipo do Pokémon": "Digite o tipo do Pokémon",
+    "Aplicar": "Aplicar",
+    "Limpar": "Limpar",
+
+    "Detalhes": "Detalhes",
+    "Sobre": "Sobre",
+    "Experiência Base": "Experiência Base",
+    "Altura": "Altura",
+    "Peso": "Peso",
+    "Abilities": "Habilidades"
   }
 }

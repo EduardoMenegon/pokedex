@@ -1,13 +1,16 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 
 const WelcomeScreen = () => {
   const router = useRouter();
+  
+  const { t } = useTranslation();
 
   return (
     <>
-    <View className="bg-red-600 h-8"></View>
+      <View className="bg-red-600 h-8"></View>
       <View className="flex-1 bg-slate-300">
         <View className="items-center px-2">
           <Image
@@ -17,7 +20,7 @@ const WelcomeScreen = () => {
           />
 
           <Text className="text-slate-800 font-extrabold text-[16px] mb-4">
-            Clique na Pokébola para entrar !
+            {t("Clique na Pobébola para entrar !")}
           </Text>
 
           <View>
@@ -31,7 +34,7 @@ const WelcomeScreen = () => {
               <View className="absolute h-12 w-12 bg-black rounded-full flex items-center justify-center">
                 <View className="h-10 w-10 bg-white rounded-full flex items-center justify-center">
                   <Text className="text-black font-extrabold text-[12px]">
-                    Entrar
+                    {t("Entrar")}
                   </Text>
                 </View>
               </View>
