@@ -5,9 +5,9 @@ import { NetworkProvider } from "react-native-offline";
 const StackLayout = () => {
   return (
     <NetworkProvider>
-      <Stack>
-        <Stack.Screen name="welcome"  options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack screenOptions={{headerShown: false}}>
+        <Stack.Screen name="welcome" />
+        <Stack.Screen name="(tabs)" />
       </Stack>
     </NetworkProvider>
   );

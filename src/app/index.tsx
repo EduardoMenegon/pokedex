@@ -1,7 +1,7 @@
-import { Redirect } from "expo-router";
+import WelcomeScreen from "@/features/Welcome/WelcomeScreen";
 
-const StartPage =() => {
-  return <Redirect href="/welcome" />;
+const index =() => {
+  return <WelcomeScreen />;
 }
 
-export default StartPage
+export default index
