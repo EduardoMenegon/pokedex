@@ -23,7 +23,7 @@ const SettingsScreen = () => {
 
   return (
     <View className="flex-1 bg-slate-300 px-1 py-4 gap-4">
-      <Card className="rounded-xl h-2/3">
+      <Card className="rounded-xl flex-1">
         <CardHeader className=" items-center bg-red-600">
           <CardTitle className="text-slate-50">{t("Configuracoes")}</CardTitle>
         </CardHeader>
