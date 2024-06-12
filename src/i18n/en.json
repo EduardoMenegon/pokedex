@@ -2,7 +2,7 @@
   "translation": {
     "Pokedex": "Pokedex",
     "Ranking": "Ranking",
-    "Configurações": "Settings",
+    "Configuracoes": "Settings",
 
     "Nenhum Pokémon encontrado": "No Pokemon found.",
 
@@ -22,6 +22,10 @@
     "Experiência Base": "Base Experience",
     "Altura": "Height",
     "Peso": "Weight",
-    "Abilities": "Abilities"
+    "Abilities": "Abilities",
+
+    "Idioma": "Language",
+    "Portugues": "Portuguese",
+    "Ingles": "English"
   }
 }

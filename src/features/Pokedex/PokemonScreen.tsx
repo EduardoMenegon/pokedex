@@ -141,8 +141,8 @@ const PokemonScreen = () => {
           onClose={handleCloseFilterModal}
         >
           <FilterPokemonModal
-            isVisible={isFilterModalVisible}
-            onClose={() => setIsFilterModalVisible(false)}
+
+            // onClose={() => setIsFilterModalVisible(false)}
             onApplyFilter={handleApplyFilter}
             onClearFilter={handleClearFilter}
             initialFilter={filter}
