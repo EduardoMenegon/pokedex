@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, Modal } from "react-native";
+import { Text, View, TouchableOpacity, Modal, Alert } from "react-native";
 import Reanimated, { PinwheelIn, SlideInDown } from "react-native-reanimated";
 
 import { useRouter } from "expo-router";
@@ -14,11 +14,11 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  } from "@/components/Card/Card";
-  
-  import PokemonList from "./PokemonList";
-  import ModalLayout from "../layouts/ModalLayout/ModalLayout";
-  import FilterPokemonModal from "./modals/FilterPokemonModal";
+} from "@/components/Card/Card";
+
+import PokemonList from "./PokemonList";
+import ModalLayout from "../layouts/ModalLayout/ModalLayout";
+import FilterPokemonModal from "./modals/FilterPokemonModal";
 
 const PokemonScreen = () => {
   const isConnected = useIsConnected();
@@ -57,6 +57,14 @@ const PokemonScreen = () => {
   };
 
   const fetchPokemons = async (limit, offset) => {
+    if (!isConnected) {
+      Alert.alert(
+        t("Sem conexao"),
+        t("Voce esta offline. Verifique sua conexao Wi-Fi.")
+      );
+      return;
+    }
+
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon`, {
         params: {
@@ -83,12 +91,15 @@ const PokemonScreen = () => {
 
   const loadPokemons = async (newOffset) => {
     if (isLoading || isEndReached) return;
+
     setIsLoading(true);
     const pokemonList = await fetchPokemons(20, newOffset);
     const pokemonDetailsPromises = pokemonList.map((pokemon) =>
       fetchPokemonDetails(pokemon.url)
     );
+
     const newPokemons = await Promise.all(pokemonDetailsPromises);
+
     if (newPokemons.length === 0) setIsEndReached(true);
     setPokemons((prevPokemons) => [...prevPokemons, ...newPokemons]);
     setOffset(newOffset + 20);
@@ -97,10 +108,12 @@ const PokemonScreen = () => {
 
   const refreshPokemons = async () => {
     setIsRefreshing(true);
+
     const pokemonList = await fetchPokemons(20, 0);
     const pokemonDetailsPromises = pokemonList.map((pokemon) =>
       fetchPokemonDetails(pokemon.url)
     );
+
     const newPokemons = await Promise.all(pokemonDetailsPromises);
     setPokemons(newPokemons);
     setOffset(20);
@@ -111,8 +124,14 @@ const PokemonScreen = () => {
   const applyFilters = () => {
     const { name, type } = filter;
     const filtered = pokemons.filter((pokemon) => {
-      const matchesName = name ? pokemon.name.toLowerCase().includes(name.toLowerCase()) : true;
-      const matchesType = type ? pokemon.types.some(t => t.type.name.toLowerCase().includes(type.toLowerCase())) : true;
+      const matchesName = name
+        ? pokemon.name.toLowerCase().includes(name.toLowerCase())
+        : true;
+      const matchesType = type
+        ? pokemon.types.some((t) =>
+            t.type.name.toLowerCase().includes(type.toLowerCase())
+          )
+        : true;
       return matchesName && matchesType;
     });
     setFilteredPokemons(filtered);
@@ -141,7 +160,6 @@ const PokemonScreen = () => {
           onClose={handleCloseFilterModal}
         >
           <FilterPokemonModal
-
             // onClose={() => setIsFilterModalVisible(false)}
             onApplyFilter={handleApplyFilter}
             onClearFilter={handleClearFilter}
@@ -200,7 +218,9 @@ const PokemonScreen = () => {
             <CardContent className="p-0 flex-1">
               {filteredPokemons.length === 0 ? (
                 <View className="flex-1 justify-center items-center">
-                  <Text className="text-slate-500 text-lg">{t("Nenhum Pokémon encontrado")}</Text>
+                  <Text className="text-slate-500 text-lg">
+                    {t("Nenhum Pokémon encontrado")}
+                  </Text>
                 </View>
               ) : (
                 <PokemonList
