@@ -95,7 +95,7 @@ const PokemonItem = ({ pokemon }) => {
       case "steel":
         return "bg-gray-400";
       case "fairy":
-        return "bg-pink-300";
+        return "bg-pink-100";
       default:
         return "bg-slate-300";
     }
@@ -119,6 +119,7 @@ const PokemonItem = ({ pokemon }) => {
             pokemon={pokemon}
             color={getLightenColorByType(pokemon.types[0].type.name)}
             onClose={handleCloseDetailsModal}
+            getColorByType={getColorByType}
           />
         </ModalLayout>
       </Modal>
@@ -153,7 +154,7 @@ const PokemonItem = ({ pokemon }) => {
                   key={index}
                   className={`items-center ${getColorByType(
                     typeInfo.type.name
-                  )} rounded-2xl px-2 py-1 flex-1 border-slate-300 border`}
+                  )} rounded-2xl px-2 py-1 flex-1  border-slate-800 border`}
                 >
                   <Text className="uppercase text-[12px] text-white">
                     {typeInfo.type.name}

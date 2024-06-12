@@ -30,7 +30,7 @@ const ModalLayout = ({
 
   return (
     <KeyboardAvoiding>
-      <SafeAreaView className="flex-1 bg-blue-400 pt-4">
+      <SafeAreaView className="flex-1 bg-red-600 pt-4">
         <Card className={fullScreen && "flex-1"}>
           <CardHeader className="flex-row justify-between items-center">
             <CardTitle>{title}</CardTitle>

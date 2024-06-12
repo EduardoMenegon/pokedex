@@ -1,22 +1,47 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 
-interface DetailsTaskModalProps {
+interface DetailsPokemonModalProps {
   pokemon: any;
-  color: any;
+  color: string;
+  getColorByType: Function;
   onClose: () => void;
 }
 
 const DetailPokemonModal = ({
   color,
   pokemon,
-}: DetailsTaskModalProps) => {
+  getColorByType,
+}: DetailsPokemonModalProps) => {
   return (
-    <View className={`${color} flex-1 p-2`}>
+    <View className={`${color} flex-1 px-2`}>
       <View>
+        <View className="flex-row justify-between mt-4 mx-4">
+          <Text className="text-[24px] font-extrabold text-slate-800 uppercase">
+            {pokemon.name}
+          </Text>
+          <Text className="text-[20px] text-slate-600">#{pokemon.id}</Text>
+        </View>
+        <View className="flex-row gap-1 p-3">
+          {pokemon.types.map((typeInfo, index) => (
+            <View
+              key={index}
+              className={`items-center ${getColorByType(
+                typeInfo.type.name
+              )} rounded-2xl px-2 py-1 flex-1 border-slate-800 border`}
+            >
+              <Text className="uppercase text-[12px] text-white">
+                {typeInfo.type.name}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      <View className="items-center">
         <Image
           source={{ uri: pokemon.sprites.other.home.front_default }}
-          style={{ width: 350, height: 300 }}
+          style={{ width: 300, height: 250 }}
           resizeMode="contain"
         />
       </View>
@@ -26,12 +51,6 @@ const DetailPokemonModal = ({
           <View className="border-b border-slate-400">
             <Text className="text-[18px] font-extrabold text-slate-800">
               About
-            </Text>
-          </View>
-          <View className="flex-row justify-between w-1/2">
-            <Text className="text-[16px] text-slate-400">Name</Text>
-            <Text className="text-[16px] font-bold text-slate-800">
-              {pokemon.name}
             </Text>
           </View>
           <View className="flex-row justify-between w-1/2">
@@ -60,9 +79,9 @@ const DetailPokemonModal = ({
               Abilities
             </Text>
           </View>
-          <View className="gap-2">
+          <View>
             {pokemon.abilities.map((ability: any, index: number) => (
-              <Text className="text-[16px] text-slate-800 uppercase">
+              <Text key={index} className="text-[16px] text-slate-800 font-bold uppercase">
                 {ability.ability.name}
               </Text>
             ))}

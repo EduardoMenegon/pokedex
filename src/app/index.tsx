@@ -1,7 +1,7 @@
 import { Redirect } from "expo-router";
 
 const StartPage =() => {
-  return <Redirect href="/pokedex" />;
+  return <Redirect href="/welcome" />;
 }
 
 export default StartPage

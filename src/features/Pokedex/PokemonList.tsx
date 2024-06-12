@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
-import { VirtualizedList, RefreshControl, ActivityIndicator } from "react-native";
+import { VirtualizedList, RefreshControl } from "react-native";
 import PokemonItem from "./items/PokemonItem";
+import { Loading } from "@/components/Loading/Loading";
 
 
 const PokemonList = ({ pokemons, isLoading, isRefreshing, onLoadMore, onRefresh }) => {
@@ -11,7 +12,7 @@ const PokemonList = ({ pokemons, isLoading, isRefreshing, onLoadMore, onRefresh 
 
   const renderFooter = () => {
     if (!isLoading) return null;
-    return <ActivityIndicator size="large" className="mt-2" />;
+    return <Loading />;
   };
 
   return (

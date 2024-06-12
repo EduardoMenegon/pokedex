@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Ranking = () => {
+const SettingsScreen = () => {
   return (
     <View>
-      <Text>ranking</Text>
+      <Text>SettingsScreen</Text>
     </View>
   )
 }
 
-export default Ranking
+export default SettingsScreen

@@ -14,7 +14,7 @@ const CardHeader = forwardRef<View, ViewProps>(
   ({ className, ...props }, ref) => (
     <View
       ref={ref}
-      className="p-3 bg-slate-100 shadow-md shadow-black rounded-t-3xl"
+      className="p-3 bg-slate-100 shadow-md shadow-black rounded-t-xl"
       {...props}
     />
   )
